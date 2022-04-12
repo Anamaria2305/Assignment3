@@ -1,0 +1,42 @@
+.myAwesomeTable{
+    border: 1px solid;
+    width:800px
+  }
+  th, td {
+    border: 1px solid black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .myclass{
+    width: 100px; 
+    height: 50px; border: 1px solid black;
+    color:blueviolet;
+    background-color: aqua;
+}
+
+.myclass:hover {
+  color:aqua;
+  background-color:#002ead;
+  transition: 0.7s;
+}
+
+.myclass2{
+  width: 150px; 
+  height: 50px;
+  color:blueviolet;
+  background-color: aqua;
+  align-items: center;
+}
+
+.myclass2:hover {
+color:aqua;
+background-color:#002ead;
+transition: 0.7s;
+}
+
+.formm{
+  width: 150px; 
+  color:blueviolet;
+  background-color: aqua;
+  font-weight: bold;
+  text-align: center;
+}
