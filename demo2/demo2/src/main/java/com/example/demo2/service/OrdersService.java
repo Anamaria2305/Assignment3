@@ -65,8 +65,9 @@ public class OrdersService {
     public Orders changeStatusDeclined(Integer order_id){
         Orders orders=iOrdersRepository.findAll().stream().filter(o->o.getId()==order_id).findFirst().orElse(null);
         if(orders!=null){
-           orders.setStatus("Declined");
-           iOrdersRepository.save(orders);
+            if(orders.getStatus().equals("Pending"))
+            {orders.setStatus("Declined");
+           iOrdersRepository.save(orders);}
         }
         else
             System.out.println("No order with that id");

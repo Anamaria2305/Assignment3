@@ -15,7 +15,11 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     IUserRepository iUserRepository;
+
+
     final String secretKey = "ssshhhhhhhhhhh!!!!";
+
+
     public List<User> getAll(){
         return (List<User>) iUserRepository.findAll();
     }

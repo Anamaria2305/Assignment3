@@ -8,9 +8,11 @@ function Menu() {
     const [errorMessage, setMessage]= useState("");
     const [data, setData] = useState(["No data"]);
     const [data2, setData2] = useState(["No data"]);
+    const [data3, setData3] = useState(["No data"]);
     function handleSubmit(event) {
         event.preventDefault();
         var { uname} = document.forms[0];
+        setData3(uname.value);
         const params = new URLSearchParams({
             restaurant: uname.value
           }).toString();
@@ -47,12 +49,35 @@ function tryhard(Object){
     }</td>
     
 }
+const onClick2 = ()=>{
+    var sTable = document.getElementById('tab').innerHTML;
+
+    var style = "<style>";
+    style = style + "table {width: 100%;font: 17px Calibri;}";
+    style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+    style = style + "padding: 2px 3px;text-align: center;}";
+    style = style + "</style>";
+
+    var win = window.open('', '', 'height=700,width=700');
+
+    win.document.write('<html><head>');
+    win.document.write('<title>Menu with name '+data.name+' of restaurant ' + data3 + '</title>');  
+    win.document.write(style);         
+    win.document.write('</head>');
+    win.document.write('<body>');
+    win.document.write(sTable);        
+    win.document.write('</body></html>');
+
+    win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+    win.print();    // PRINT THE CONTENTS.
+
+};
     return (
         <div>
-            <Navbar />
-            <div>
+            <Navbar /> 
             <h1>{data.name} </h1>
-             
+            <div id="tab">   
             <table className="myAwesomeTable">
                 <thead>
                     <tr>
@@ -97,6 +122,7 @@ function tryhard(Object){
 
     
     </div>
+    <input  type='button' value='Export to Pdf'  onClick={()=>onClick2()}/>
         </div>
       );
 }

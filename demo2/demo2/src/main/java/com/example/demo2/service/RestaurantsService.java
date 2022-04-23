@@ -23,7 +23,6 @@ public class RestaurantsService {
             Admins admin=adminsService.getById(admin_id);
             restaurant.setAdmin(admin);
             admin.setRestaurant(restaurant);
-            //adminsService.updateAdmin(admin);
             return iRestaurantsRepository.save(restaurant);
         }
         else
