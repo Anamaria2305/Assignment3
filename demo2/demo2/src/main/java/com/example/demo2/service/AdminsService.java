@@ -4,6 +4,8 @@ import com.example.demo2.entity.Admins;
 import com.example.demo2.entity.User;
 import com.example.demo2.repository.IAdminsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,4 +34,6 @@ public class AdminsService {
         Optional <Admins> admin=iAdminsRepository.findAll().stream().filter(o->o.getUsername().equals(username) && o.getPassword().equals(password)).findFirst();
         return admin.orElse(null);
     }
+
+
 }

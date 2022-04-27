@@ -24,16 +24,17 @@ public class UserService {
         return (List<User>) iUserRepository.findAll();
     }
 
-    public void saveUser(User user){
+    public User saveUser(User user){
         if(!user.getUsername().isEmpty() && user.getUsername()!=null){
         String notencrypted=user.getPassword();
         String encryptedPas=AES.encrypt(notencrypted,secretKey);
         user.setPassword(encryptedPas);
-        iUserRepository.save(user);
+        return iUserRepository.save(user);
         }
         else
         {
             System.out.println("Data is missing");
+            return null;
         }
     }
 
@@ -46,4 +47,5 @@ public class UserService {
         Optional<User> user=iUserRepository.findById(id);
         return user.orElse(null);
     }
+
 }

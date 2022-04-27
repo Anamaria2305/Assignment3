@@ -16,13 +16,14 @@ public class CategoryService {
     @Autowired
     ICategoryRepository iCategoryRepository;
 
-    public void saveCategory(Category category){
+    public Category saveCategory(Category category){
         if(!category.getName().isEmpty() && category.getName()!=null){
-            iCategoryRepository.save(category);
+            return iCategoryRepository.save(category);
         }
         else
         {
             System.out.println("Data is missing");
+            return null;
         }
     }
     public List<Category> getAll(){
@@ -34,7 +35,4 @@ public class CategoryService {
         return category.orElse(null);
     }
 
-    public void updateCategory(Category category){
-        iCategoryRepository.save(category);
-    }
 }

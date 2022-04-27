@@ -3,6 +3,8 @@ package com.example.demo2.service;
 import com.example.demo2.entity.*;
 import com.example.demo2.repository.IOrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,8 @@ public class OrdersService {
     UserService userService;
     @Autowired
     FoodService foodServiced;
-
+    @Autowired
+    private JavaMailSender mailSender;
 
     public List<Orders> getAll(){
         return (List<Orders>) iOrdersRepository.findAll();
@@ -36,7 +39,7 @@ public class OrdersService {
         return orders2;
     }
 
-    public Orders saveOrders(Integer user_id, List<Food> food, Orders orders){
+    public Orders saveOrders(Integer user_id, List<Food> food, Orders orders, String fd){
         if(!orders.getStatus().isEmpty() && orders.getStatus()!=null){
 
 
@@ -48,11 +51,41 @@ public class OrdersService {
             List<Orders> newOrder= user.getOrders();
             newOrder.add(orders);
             user.setOrders(newOrder);
+
+            float s=0;
+            String foodList="";
+
             for(Food f:food){
+                s+=f.getPrice();
+                foodList=foodList+" Food: " + f.getName()+ " with price " +f.getPrice()+ "lei, ";
                 List<Orders> newOrders2=f.getOrder();
                 newOrders2.add(orders);
                 f.setOrder(newOrders2);
+
             }
+
+            Food fod=food.get(0);
+            Menu menu= fod.getMenu().get(0);
+            Restaurants rest=menu.getRestaurant();
+            Admins admins=rest.getAdmin();
+            String adem= admins.getUsername();
+            foodList=foodList.substring(0,foodList.length()-2);
+            foodList=foodList+".";
+
+
+
+
+            SimpleMailMessage mes=new SimpleMailMessage();
+            mes.setFrom("anamariaraita@gmail.com");
+
+            mes.setTo(adem);
+
+            mes.setSubject("Invoice from FoodPanda");
+
+            mes.setText("Order of user: "+ user.getUsername() + " with the address: "+ user.getAddress()+"\nWith the total price of: "
+                    + s +" lei." +"\nIt contains: " + foodList + "\nSpecial details: " + fd);
+
+            mailSender.send(mes);
             return iOrdersRepository.save(orders);
         }
         else

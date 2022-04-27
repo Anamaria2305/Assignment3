@@ -18,17 +18,19 @@ public class MenuService {
     RestaurantsService restaurantsService;
 
 
-    public void saveMenu(Menu menu,Integer id){
+    public Menu saveMenu(Menu menu,Integer id){
         if(!menu.getName().isEmpty() && menu.getName()!=null){
 
             Restaurants restaurant=restaurantsService.getById(id);
             menu.setRestaurant(restaurant);
             restaurant.setMenu(menu);
-            iMenuRepository.save(menu);
+            return iMenuRepository.save(menu);
         }
         else
         {
             System.out.println("Data is missing");
+            return null;
+
         }
     }
     public List<Menu> getAll(){

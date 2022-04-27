@@ -45,4 +45,7 @@ public class Category {
         this.foods = foods;
     }
 
+    public Category(String name) {
+        this.name = name;
+    }
 }

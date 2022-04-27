@@ -61,15 +61,4 @@ public class FoodService {
         }
     }
 
-    public float calculateAmount(List<Food> foods){
-        float amount=0;
-        if (foods.isEmpty() || foods==null)
-            amount=0;
-        else {
-            for (Food f : foods) {
-                amount=amount+f.getPrice();
-            }
-        }
-        return amount;
-    }
 }

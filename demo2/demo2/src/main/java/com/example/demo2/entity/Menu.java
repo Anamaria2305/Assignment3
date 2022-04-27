@@ -59,6 +59,16 @@ public class Menu {
         this.food = food;
     }
 
+    public Menu(String name) {
+        this.name = name;
+    }
+
+    public Menu(String name, Restaurants restaurant, List<Food> food) {
+        this.name = name;
+        this.restaurant = restaurant;
+        this.food = food;
+    }
+
     public int getId() {
         return id;
     }

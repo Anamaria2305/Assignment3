@@ -86,6 +86,12 @@ public class Restaurants {
         this.menu = menu;
     }
 
+    public Restaurants(String name, String location, String zones) {
+        this.name = name;
+        this.location = location;
+        this.zones = zones;
+    }
+
     public Restaurants() {
     }
 

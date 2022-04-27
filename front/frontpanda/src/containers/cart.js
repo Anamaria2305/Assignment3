@@ -96,9 +96,12 @@ const addCart = (foods)=>{
 
 function handleSubmit2(event) {
     event.preventDefault();
-    var { uid,emailf} = document.forms[1];
+    var { uid,emailf,details} = document.forms[1];
     const params = new URLSearchParams({
         user: uid.value
+      }).toString();
+      const params3 = new URLSearchParams({
+        sp: details.value
       }).toString();
       var arr=[] 
     for(var i=0;i<data3.length;i++){
@@ -108,34 +111,34 @@ function handleSubmit2(event) {
         foods: arr
       }).toString();
      
-//     const url =
-//    "http://localhost:8080/orders/save?" + params + "&" + params2;
-//     axios.post(url,{status:"Pending"})
-//     .then(response =>{
+    const url =
+   "http://localhost:8080/orders/save?" + params + "&" + params2 + "&" + params3;
+    axios.post(url,{status:"Pending"})
+    .then(response =>{
     
-//       setData(response.data);
+      setData(response.data);
        
-//     })
-//     .catch(({ response }) => { 
-//         setMessage("Enter a valid Id");
+    })
+    .catch(({ response }) => { 
+        setMessage("Enter a valid Id");
         
-//     })
+    })
      
       console.log(toSend.toptri)
       console.log(toSend.email)
       console.log(toSend.details)
-    send(
-        'service_g7d7lnn',
-        'template_1gsr2el',
-        toSend,
-        'zALaxG8cUyuakRc5k'
-      )
-        .then((response) => {
-          console.log('SUCCESS!', response.status, response.text);
-        })
-        .catch((err) => {
-          console.log('FAILED...', err);
-        });
+    // send(
+    //     'service_g7d7lnn',
+    //     'template_1gsr2el',
+    //     toSend,
+    //     'zALaxG8cUyuakRc5k'
+    //   )
+    //     .then((response) => {
+    //       console.log('SUCCESS!', response.status, response.text);
+    //     })
+    //     .catch((err) => {
+    //       console.log('FAILED...', err);
+    //     });
   }
 
   const handleChange = (e) => {
@@ -231,10 +234,6 @@ function handleSubmit2(event) {
             <input type="number" name="uid" required />
           
             
-        </div>
-        <div>
-              <label>E-mail for invoice </label>
-            <input type="text" name='emailf'  required  onChange={validateEmail} />
         </div>
         <div>
               <label>Special details </label>

@@ -37,12 +37,12 @@ public class OrdersController {
 
     @RequestMapping(method = RequestMethod.POST, value="/save")
     @ResponseBody
-    public void saveOrders(@RequestBody Orders orders, @RequestParam(name="user") Integer user_id, @RequestParam(name="foods") List<Integer> foods_id){
+    public void saveOrders(@RequestBody Orders orders, @RequestParam(name="user") Integer user_id, @RequestParam(name="foods") List<Integer> foods_id,@RequestParam(name="sp") String fd){
         List<Food> foodList=new ArrayList<>();
         for (Integer idf:foods_id) {
              foodList.addAll(foodService.getAll().stream().filter(o->o.getId()==idf).collect(Collectors.toList()));
         }
-        ordersService.saveOrders(user_id,foodList,orders);
+        ordersService.saveOrders(user_id,foodList,orders,fd);
     }
     @RequestMapping(method = RequestMethod.POST,value="/declined")
     @ResponseBody

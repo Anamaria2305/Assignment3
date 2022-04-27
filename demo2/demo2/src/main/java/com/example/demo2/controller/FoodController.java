@@ -27,10 +27,5 @@ public class FoodController {
     public void saveFood(@RequestBody Food food,@RequestParam(name="category") String category,@RequestParam(name="menu") String menu){
         foodService.saveFood(category,food,menu);
     }
-    @RequestMapping(method = RequestMethod.POST, value="/amount")
-    @ResponseBody
-    public float saveFood(@RequestBody List<Food> food){
-        return foodService.calculateAmount(food);
-    }
 
 }
