@@ -14,6 +14,10 @@ public class AES {
     private static SecretKeySpec secretKey;
     private static byte[] key;
 
+    /**
+     *
+     * @param myKey - the secret key given for creating an encryption cipher
+     */
     public static void setKey(final String myKey) {
         MessageDigest sha = null;
         try {
@@ -27,6 +31,12 @@ public class AES {
         }
     }
 
+    /**
+     *
+     * @param strToEncrypt - the string we want to encrypt
+     * @param secret - the secret key
+     * @return the encrypted string
+     */
     public static String encrypt(final String strToEncrypt, final String secret) {
         try {
             setKey(secret);
@@ -40,16 +50,4 @@ public class AES {
         return null;
     }
 
-    public static String decrypt(final String strToDecrypt, final String secret) {
-        try {
-            setKey(secret);
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder()
-                    .decode(strToDecrypt)));
-        } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
-        }
-        return null;
-    }
 }

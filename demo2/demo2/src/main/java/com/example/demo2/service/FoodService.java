@@ -19,12 +19,24 @@ public class FoodService {
     @Autowired
     MenuService menuService;
 
+    /**
+     *
+     * @return - a list with all the food objects that exist in the DB and with the specific information
+     *           for each one and sorted alphabetically
+     */
     public List<Food> getAll(){
         List<Food> foods = (List<Food>) iFoodRepository.findAll();
         foods.sort(((o1, o2) -> o1.getCategory().getName().compareTo(o2.getCategory().getName())));
         return foods;
     }
 
+    /**
+     *
+     * @param category_name - the name of the category of the food
+     * @param food -represents the category object we want to save in the DB
+     * @param menu_name - the name of the menu to which the food belongs
+     * @return -the saved food entity including the id
+     */
     public Food saveFood(String category_name, Food food,String menu_name){
         if(!food.getName().isEmpty() && food.getName()!=null){
 
